@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js ar - cones</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+	<body>
+
+		<div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> ar - cones<br/>(Chrome Android 81+)
+		</div>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "/build/three.module.js",
+					"arbutton": "/build/ARButton.js"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+			import { ARButton } from 'arbutton';
+
+			let camera, scene, renderer;
+			let controller;
+
+			init();
+			animate();
+
+			function init() {
+
+				const container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
+
+                const ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+                ambientLight.intensity = 0.2;
+                scene.add( ambientLight );
+
+				const sunHeight = 1.3*0;
+                const sunLight = new THREE.PointLight( 0xf5f2c7 );
+                sunLight.position.set( 0, sunHeight, 0 );
+                sunLight.intensity = 1.0;
+                sunLight.decay = 0.0;
+                sunLight.castShadow = true;
+                scene.add( sunLight );
+
+				//
+
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.shadowMap.enabled = true;
+				renderer.shadowMap.type = THREE.BasicShadowMap;
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.xr.enabled = true;
+				container.appendChild( renderer.domElement );
+
+				//
+
+				document.body.appendChild( ARButton.createButton( renderer ) );
+
+				//
+                const sunRadius = 0.25;
+                const sunColor = 0xffbf00;
+                let sunGeometry = new THREE.SphereGeometry( sunRadius, 32, 16 ); 
+                let sunMaterial = new THREE.MeshBasicMaterial( { color: sunColor } ); 
+				sunMaterial.opacity = 0.3;
+                let sunMesh = new THREE.Mesh( sunGeometry, sunMaterial );
+				sunMesh.position.set( 0, sunHeight, 0);
+				scene.add( sunMesh );
+
+				const earthRadius = 0.15;
+                const earthColor = 0x00aaff;
+                let earthGeometry = new THREE.SphereGeometry( earthRadius, 32, 16 ); 
+                let earthMaterial = new THREE.MeshPhongMaterial( { color: earthColor } ); 
+                let earthMesh = new THREE.Mesh( earthGeometry, earthMaterial );
+				earthMesh.position.set(0, sunHeight, 1.0);
+				earthMesh.castShadow = true;
+				earthMesh.receiveShadow = true;
+				scene.add( earthMesh );
+
+				const moonRadius = 0.05;
+                const moonColor = 0xd0d2d2;
+                let moonGeometry = new THREE.SphereGeometry( moonRadius, 32, 16 ); 
+                let moonMaterial = new THREE.MeshPhongMaterial( { color: moonColor } ); 
+                let moonMesh = new THREE.Mesh( moonGeometry, moonMaterial );
+				moonMesh.position.set(0, sunHeight, 0.7);
+				moonMesh.castShadow = true;
+				moonMesh.receiveShadow = true;
+				scene.add( moonMesh );
+							
+				function onSelect() {
+					const controllerVec = new THREE.Vector3( );
+					controllerVec.setFromMatrixPosition(controller.matrixWorld);
+					const distanceToMoon = moonMesh.position.distanceTo(controllerVec);
+					console.log("Piçou");
+					console.log(distanceToMoon);
+					if (distanceToMoon < moonRadius) {
+						moonMesh.position = controllerVec;
+					}
+				}
+				function onRelease() {
+					const controllerVec = new THREE.Vector3( );
+					controllerVec.setFromMatrixPosition(controller.matrixWorld);
+					const distanceToMoon = moonMesh.position.distanceTo(controllerVec);
+					console.log("Soltou");
+					console.log(distanceToMoon);
+					if (distanceToMoon < moonRadius) {
+						moonMesh.position = controllerVec;
+					}
+				}
+
+				controller = renderer.xr.getController( 0 );
+				//https://immersive-web.github.io/webxr/input-explainer.html#input-events				
+				controller.addEventListener( 'selectstart', onSelect );
+				controller.addEventListener( 'selectend', onRelease );
+
+				scene.add( controller );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function animate() {
+
+				renderer.setAnimationLoop( render );
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+	</body>
+</html>

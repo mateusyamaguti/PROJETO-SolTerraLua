@@ -33,6 +33,7 @@
 			animate();
 
 			function init() {
+				console.log("Entrou");
 
 				const container = document.createElement( 'div' );
 				document.body.appendChild( container );
@@ -68,6 +69,7 @@
 					mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
 					mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
 					scene.add( mesh );
+					console.log("Pincou");
 
 				}
 
