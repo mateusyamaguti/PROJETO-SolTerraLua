@@ -1,14 +1,14 @@
 import {
 	Object3D
-} from 'three';
+} from '/threejs/three.module.js';
 
 import {
 	XRHandPrimitiveModel
-} from './XRHandPrimitiveModel.js';
+} from '/threejs/XRHandPrimitiveModel.js';
 
 import {
 	XRHandMeshModel
-} from './XRHandMeshModel.js';
+} from '/threejs/XRHandMeshModel.js';
 
 class XRHandModel extends Object3D {
 

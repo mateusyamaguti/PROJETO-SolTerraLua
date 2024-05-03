@@ -4,7 +4,7 @@
 		<title>three.js vr - teleport</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<link type="text/css" rel="stylesheet" href="/main.css">
 	</head>
 	<body>
 
@@ -12,22 +12,13 @@
 			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> vr - teleport
 		</div>
 
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "../build/three.module.js",
-					"three/addons/": "./jsm/"
-				}
-			}
-		</script>
-
 		<script type="module">
 
-			import * as THREE from 'three';
+			import * as THREE from '/threejs/three.module.js';
 
-			import { BoxLineGeometry } from 'three/addons/geometries/BoxLineGeometry.js';
-			import { VRButton } from 'three/addons/webxr/VRButton.js';
-			import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
+			import { BoxLineGeometry } from '/threejs/BoxLineGeometry.js';
+			import { VRButton } from '/threejs/VRButton.js';
+			import { XRControllerModelFactory } from '/threejs/XRControllerModelFactory.js';
 
 			let camera, scene, raycaster, renderer;
 			let controller1, controller2;

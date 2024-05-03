@@ -18,6 +18,13 @@ Para transmitir em rede local via wi-fi hotspot do computador do servidor para a
 
 ## Organização das pastas
 
+- **ssl**. Arquivos dos certificados ssl
+- **threejs**. Arquivos da biblioteca Three.js
 - **basicThreeJs**. Exemplo básico do getting started no site do Three.js.
 - **webxr_ar_cones**. Exemplo de AR no site do Three.js. Exemplo já testado e usado como ensaio básico de servidor local no notebook para o cliente no óculos.
+
+## Como rodar um exemplo em servidor https usando a estrutura de pastas acima
+
+A partir do diretório raiz do projeto rodar o script `runThreeExample.sh` e escolher a pasta do exemplo de interesse na aba do navegador de internet que será aberta.
+
 

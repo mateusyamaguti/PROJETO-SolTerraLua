@@ -4,7 +4,7 @@
 		<title>three.js vr - handinput</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<link type="text/css" rel="stylesheet" href="/main.css">
 	</head>
 	<body>
 
@@ -13,25 +13,13 @@
 			(Oculus Browser 15.1+)
 		</div>
 
-		<script type="importmap">
-			{
-				"imports": {
-                    "three": "/build/three.module.js",
-                    "orbitControls": "/build/OrbitControls.js",
-					"vRButton": "/build/VRButton.js",
-                    "xRControllerModelFactory": "/build/XRControllerModelFactory.js",
-                    "xRHandModelFactory": "/build/XRHandModelFactory.js"
-				}
-			}
-		</script>
-
 		<script type="module">
 
-			import * as THREE from 'three';            
-			import { OrbitControls } from 'orbitControls';
-			import { VRButton } from 'vRButton';
-			import { XRControllerModelFactory } from 'xRControllerModelFactory';
-			import { XRHandModelFactory } from 'xRHandModelFactory';
+			import * as THREE from '/threejs/three.module.js';            
+			import { OrbitControls } from '/threejs/OrbitControls.js';
+			import { VRButton } from '/threejs/VRButton.js';
+			import { XRControllerModelFactory } from '/threejs/XRControllerModelFactory.js';
+			import { XRHandModelFactory } from '/threejs/XRHandModelFactory.js';
 
 			let container;
 			let camera, scene, renderer;

@@ -4,32 +4,23 @@
 		<title>solterralua - solo</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<link type="text/css" rel="stylesheet" href="/main.css">
 	</head>
 	<body>
 
 		<div id="info">
 			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> ar - cones<br/>(Chrome Android 81+)
-		</div>
-
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "threejs/build/three.module.js",
-					"arbutton": "threejs/build/ARButton.js"
-				}
-			}
-		</script>
+		</div>		
 
 		<script type="module">
 
-			import * as THREE from 'three';
-			import { ARButton } from 'arbutton';
+			import * as THREE from '/threejs/three.module.js';
+			import { ARButton } from '/threejs/ARButton.js';
 
 			let camera, scene, renderer;
-			let controller;
+			let controller, baseReferenceSpace;
 
-			const sunHeight = 1.7;
+			const sunHeight = 2.0;
 
 			init();
 			animate();
@@ -65,6 +56,18 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
+				
+				renderer.xr.addEventListener( 'sessionstart', (e) => {					
+					const baseReferenceSpace = renderer.xr.getReferenceSpace();				
+					const offsetPosition = camera.position;
+					const offsetRotation = camera.quaternion;
+					const transform = new XRRigidTransform(
+						{ x: offsetPosition.x, y: offsetPosition.y, z: offsetPosition.z, w: offsetPosition.w },
+						{ x: offsetRotation.x, y: -offsetRotation.y, z: offsetRotation.z, w: offsetRotation.w }
+					);
+					const teleportSpaceOffset = baseReferenceSpace.getOffsetReferenceSpace( transform );
+					renderer.xr.setReferenceSpace( teleportSpaceOffset );
+				});				
 
 				//
 
