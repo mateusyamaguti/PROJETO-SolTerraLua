@@ -62,8 +62,8 @@
 					const offsetPosition = camera.position;
 					const offsetRotation = camera.quaternion;
 					const transform = new XRRigidTransform(
-						{ x: offsetPosition.x, y: offsetPosition.y, z: offsetPosition.z, w: offsetPosition.w },
-						{ x: offsetRotation.x, y: -offsetRotation.y, z: offsetRotation.z, w: offsetRotation.w }
+						{ x: offsetPosition.z, y: -offsetPosition.y, z: offsetPosition.x, w: offsetPosition.w },
+						{ x: offsetRotation.z, y: -offsetRotation.y, z: offsetRotation.x, w: offsetRotation.w }
 					);
 					const teleportSpaceOffset = baseReferenceSpace.getOffsetReferenceSpace( transform );
 					renderer.xr.setReferenceSpace( teleportSpaceOffset );
