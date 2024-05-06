@@ -16,6 +16,13 @@ Para transmitir em rede local via wi-fi hotspot do computador do servidor para a
 4) No dispositivo cliente, conectar na rede hotspot do servidor (se tiver acesso a 4G, desabilitá-lo, senão ele vai tentar conectar no 4G para buscar internet).
 5) Acessar o endereço informado no passo 3. No primeiro acesso, apesar do https, o browser informará que a conexão não é segura. Basta entrar na opção de modo inseguro e nas próximas vezes essa confirmação não será mais solicitada.
 
+### Dificuldades com o linux Mint
+
+As instruções acima funcionam bem com o Ubuntu, mas no Mint tive dificuldades. Consegui rodar o servidor da seguinte maneira:
+
+- Editar a conexão de rede e escolher Hotspot(ou ponto de acesso em PT) em Wi-Fi mode. Em Wi-fi Security, usar Enhanced Open. Nenhum protocolo de segurança funcionou, por isso tive que deixar aberto.
+- No navegador do oculus quest escrever o endereço completo sem esquecer do https, por exemplo: `https://10.42.0.1:8080`
+
 ## Organização das pastas
 
 - **ssl**. Arquivos dos certificados ssl
