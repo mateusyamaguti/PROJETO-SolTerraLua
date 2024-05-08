@@ -41,7 +41,7 @@ A partir do diretório raiz do projeto rodar o script `runServer.sh` e escolher 
 
 ## Copiando pasta de um repositório Github
 
-Para baixar pastas específicas de um repositório GitHub, como pastas de exemplos, basta acessar o site [https://kinolien.github.io/gitzip/] e colar o endereço completo da pasta para baixar o seu conteúdo com arquivo zip.
+Para baixar pastas específicas de um repositório GitHub, como pastas de exemplos, basta acessar o site https://kinolien.github.io/gitzip/ e colar o endereço completo da pasta para baixar o seu conteúdo com arquivo zip.
 
 ## A-Frame
 
@@ -55,3 +55,28 @@ Não encontrei uma ferramenta que crie um mesmo sistema de referência baseado n
 - Incluir a opção `real-world-meshing` em `<a-scene>`. Isso não necessariamente ajuda com o posicionamento e orientação comuns a todos os óculos, mas faz com que os objetos tenham tamanhos e posições em metros no ambiente.
 - A origem do sistema de coordenadas é nos pés da pessoa quando ela confirmou a fronteira. A orientação é +z na direção das costas, +x à direita e +y para cima. Ou seja, é um sistema levogiro.
 - Cuidado para não recentralizar a cena em local errado ao abrir o menu padrão do óculus em modo VR ou AR. Se isso acontecer, tem que apagar o cache e recarregar a página.
+
+## Socket.io
+
+Para inicializar um projeto com Socket.io e Express.js:
+
+1) Na raiz da pasta do projeto criar o arquivo package.json com o conteúdo:
+```json
+{
+  "name": "Project name",
+  "version": "0.0.1",
+  "description": "Project description",
+  "type": "module",
+  "dependencies": {}
+}
+```
+
+2) Instalar o Express.js:
+```bash
+npm install express@4
+```
+
+3) Instalar o Socket.io:
+```bash
+npm install socket.io
+```
