@@ -3,6 +3,8 @@ AFRAME.registerComponent('button', {
   schema: {
     label: {default: 'label'},
     width: {default: 0.11},
+    height: {default: 0.05},
+    depth: {default: 0.02},
     toggleable: {default: false},
     color: {default: '#3a50c5'}
   },
@@ -13,14 +15,14 @@ AFRAME.registerComponent('button', {
     el.setAttribute('geometry', {
       primitive: 'box',
       width: this.data.width,
-      height: 0.05,
-      depth: 0.04
+      height: this.data.height,
+      depth: this.data.depth
     });
 
     el.setAttribute('material', {color: this.data.color});
     el.setAttribute('pressable', '');
 
-    labelEl.setAttribute('position', '0 0 0.02');
+    labelEl.setAttribute('position', `0 0 ${this.data.depth/2}`);
     labelEl.setAttribute('text', {
       value: this.data.label,
       color: 'white',
@@ -50,13 +52,13 @@ AFRAME.registerComponent('button', {
   },
 
   stateChanged: function () {
-    var color = this.el.is('pressed') ? 'green' : this.data.color;
+    var color = this.el.is('pressed') ? '#000000' : this.data.color;
     this.el.setAttribute('material', {color: color});
   },
 
   onPressedStarted: function () {
     var el = this.el;
-    el.setAttribute('material', {color: 'green'});
+    el.setAttribute('material', {color: '#000000'});
     el.emit('click');
     if (this.data.toggleable) {
       if (el.is('pressed')) {

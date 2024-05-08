@@ -1,0 +1,1 @@
+const solRaio = 0.2;
