@@ -42,3 +42,16 @@ A partir do diretório raiz do projeto rodar o script `runServer.sh` e escolher 
 ## Copiando pasta de um repositório Github
 
 Para baixar pastas específicas de um repositório GitHub, como pastas de exemplos, basta acessar o site [https://kinolien.github.io/gitzip/] e colar o endereço completo da pasta para baixar o seu conteúdo com arquivo zip.
+
+## A-Frame
+
+### Sistema de referência comum para todos os óculos
+
+Não encontrei uma ferramenta que crie um mesmo sistema de referência baseado no ambiente real para todos os óculos. Mas é possível obter um bom resultado com os seguintes procedimentos.
+
+- Marcar uma fronteira no ambiente parecida (embora não seja crítico o tamanho).
+- Iniciar a marcação e confirmar a marcação estando na mesma posição e olhando para a mesma direção em todos os óculos.
+- Para garantir que posicionamentos anteriores não sejam usados pelo A-Frame, limpar o cache do navegador.
+- Incluir a opção `real-world-meshing` em `<a-scene>`. Isso não necessariamente ajuda com o posicionamento e orientação comuns a todos os óculos, mas faz com que os objetos tenham tamanhos e posições em metros no ambiente.
+- A origem do sistema de coordenadas é nos pés da pessoa quando ela confirmou a fronteira. A orientação é +z na direção das costas, +x à direita e +y para cima. Ou seja, é um sistema levogiro.
+- Cuidado para não recentralizar a cena em local errado ao abrir o menu padrão do óculus em modo VR ou AR. Se isso acontecer, tem que apagar o cache e recarregar a página.
