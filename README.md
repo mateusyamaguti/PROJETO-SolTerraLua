@@ -80,3 +80,46 @@ npm install express@4
 ```bash
 npm install socket.io
 ```
+
+4) Os arquivos básicos do projeto serão `index.js` e `index.html`. A estrutura básica do arquivo `index.js` será:
+```js
+import express from 'express';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { Server } from 'socket.io';
+
+import { readFileSync } from "fs";
+import { createServer } from "https";
+
+   
+const app = express();
+const httpsServer = createServer({
+    key: readFileSync('../ssl/key.pem'),
+    cert: readFileSync('../ssl/cert.pem')
+  }, app);
+const io = new Server(httpsServer);
+
+//Inclusão da pasta aframe para acesso no index.html:
+app.use('/aframe', express.static('../aframe/'));
+//Inclusão da pasta raiz deste projeto para acesso no index.html
+app.use('/', express.static('./'));
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname, 'index.html'));
+});
+
+io.on('connection', (socket) => {
+    socket.on('messageLabel', (msg) => {
+      io.emit('messageLabel', msg);
+    });
+  });
+
+const port = 8080;
+httpsServer.listen(port, () => {
+  console.log(`server running at https://127.0.0.1:${port} and https://10.42.0.1:${port}`);
+});
+```
+
+5) O servidor deverá ser inicializado com `node index.js`.

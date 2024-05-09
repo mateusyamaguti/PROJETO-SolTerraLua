@@ -59,12 +59,13 @@ periodoOrbital = { //em dias
 escalas = {
     'a1': {
         'altura': 10, // [m]
+        'diametroSolar': 1.5,  //fração do diâmetro de júpiter
         'raioOrbital': {
             'potencia': 1/2,    
             'max': 30 // [m]
         },
         'diametroPlanetario': {
-            'potencia': 1/2,
+            'potencia': 1,
             'max': 2 // [m]
         },
         'periodoRotacao': {
@@ -85,7 +86,7 @@ escalas = {
     },
     'a3': {
         'altura': 1.5, // [m]
-        'raioSol': 0.7, // [m]
+        'diametroSolar': 1.5,  //fração do diâmetro de júpiter
         'raioOrbital': {
             'potencia': 1/2,    
             'max': 3 // [m]

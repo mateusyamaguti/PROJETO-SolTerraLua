@@ -22,28 +22,43 @@
       <a-assets>
         <a-asset-item id="messageText" src="/message.html"></a-asset-item>
         <img id="solMapa" src="assets/sol.jpg">
-        <img id="mercurioMapa" src="assets/mercurio.png">
+        <img id="merMapa" src="assets/mercurio.png">
+        <img id="venMapa" src="assets/venus.jpg">
+        <img id="terMapa" src="assets/terra.jpg">
       </a-assets>      
       <a-entity id="solGeometry1" visible="true">
         <a-entity id="solGeometry2">
           <a-entity id="solGeometry3">
-            <a-entity id="solGeometry4"
-              material="src: #solMapa"        
-              scale = "0.2 0.2 0.2"
-              geometry="primitive: sphere; radius: 1.0">
+            <a-entity id="solGeometry4">
             </a-entity>
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity
-        id="merGeometry"
-        position="0 2.0 -1"
-        rotation="45 45 0"
-        material="src: #mercurioMapa"
-        geometry="primitive: sphere; radius: 0.4" 
-        scale = "1 1 1"       
-        visible="false"        
-      ></a-entity>
+      <a-entity id="merGeometry1" visible="true">
+        <a-entity id="merGeometry2">
+          <a-entity id="merGeometry3">
+            <a-entity id="merGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="venGeometry1" visible="true">
+        <a-entity id="venGeometry2">
+          <a-entity id="venGeometry3">
+            <a-entity id="venGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="terGeometry1" visible="true">
+        <a-entity id="terGeometry2">
+          <a-entity id="terGeometry3">
+            <a-entity id="terGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      
       <a-entity id="menu" menu="width:0.4; height:0.4" position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
         <a-entity id="button1" button="label: 1; width: 0.05" position="-0.15 0.16 0"></a-entity>
         <a-entity id="button2" button="label: 2; width: 0.05" position="-0.05 0.16 0"></a-entity>
@@ -68,16 +83,36 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();        
-        //console.log(escalas.a1.periodoOrbital);
-        const a3RaioOrbital = escalas.a3.raioOrbital.max/raioOrbital.net**escalas.a3.raioOrbital.potencia;        
-        const a3PeriodoOrbital = 1000*escalas.a3.periodoOrbital.max/periodoOrbital.net**escalas.a3.periodoOrbital.potencia;
-        const a3PeriodoRotacao = 1000*escalas.a3.periodoRotacao.max/periodoRotacao.net**escalas.a3.periodoRotacao.potencia;
-        document.getElementById("solGeometry2").setAttribute("position", `0 ${escalas.a3.altura} ${-a3RaioOrbital*raioOrbital.ter**escalas.a3.raioOrbital.potencia}`);
-        document.getElementById("solGeometry3").setAttribute("rotation", `${inclinacaoEixo.ter} 0 0}`);
-        document.getElementById("solGeometry1").setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${a3PeriodoOrbital*periodoOrbital.ter**escalas.a3.periodoOrbital.potencia}; easing: linear`);
-        document.getElementById("solGeometry2").setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${a3PeriodoOrbital*periodoOrbital.ter**escalas.a3.periodoOrbital.potencia}; easing: linear`);
-        document.getElementById("solGeometry4").setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${a3PeriodoRotacao*periodoRotacao.ter**escalas.a3.periodoRotacao.potencia}; easing: linear`);
-        //animation="property: position; to: 0 2.0 -2; loop: true; dur: 5000; dir: alternate"          
+      
+        //animation="property: position; to: 0 2.0 -2; loop: true; dur: 5000; dir: alternate"         
+
+        setPlanet('sol');
+        setPlanet('mer');
+        setPlanet('ven');
+        setPlanet('ter');
+        
+        function setPlanet (planet) {
+          const p = planet;
+          const Dpla;
+          
+          if (planet == 'sol')           
+          else Dpla = escalas.a1.diametroPlanetario.max/diametroPlanetario.net**escalas.a1.diametroPlanetario.potencia;
+          const Rorb = escalas.a1.raioOrbital.max/raioOrbital.net**escalas.a1.raioOrbital.potencia;                            
+          const Ttra = 1000*escalas.a1.periodoOrbital.max/periodoOrbital.net**escalas.a1.periodoOrbital.potencia;          
+          const Trot = 1000*escalas.a1.periodoRotacao.max/periodoRotacao.net**escalas.a1.periodoRotacao.potencia;
+          
+          const d = Dpla*diametroPlanetario[p]**escalas.a1.diametroPlanetario.potencia;
+
+          document.getElementById(`${p}Geometry4`).setAttribute("material", `src: #${p}Mapa`);
+          document.getElementById(`${p}Geometry4`).setAttribute("scale", `${d} ${d} ${d}`);
+          document.getElementById(`${p}Geometry4`).setAttribute("geometry", "primitive: sphere; radius: 0.5");
+
+          document.getElementById(`${p}Geometry2`).setAttribute("position", `0 ${escalas.a1.altura} ${-Rorb*raioOrbital[p]**escalas.a1.raioOrbital.potencia}`);
+          document.getElementById(`${p}Geometry3`).setAttribute("rotation", `${inclinacaoEixo[p]} 0 0}`);
+          document.getElementById(`${p}Geometry1`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
+          document.getElementById(`${p}Geometry2`).setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
+          document.getElementById(`${p}Geometry4`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Trot*periodoRotacao[p]**escalas.a1.periodoRotacao.potencia}; easing: linear`);
+        }
     </script>
   </body>
 </html>
