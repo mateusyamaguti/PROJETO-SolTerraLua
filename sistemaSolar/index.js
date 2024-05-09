@@ -34,5 +34,5 @@ io.on('connection', (socket) => {
 
 const port = 8080;
 httpsServer.listen(port, () => {
-  console.log(`server running at http://127.0.0.1:${port} and http://10.42.0.1:${port}`);
+  console.log(`server running at https://127.0.0.1:${port} and https://10.42.0.1:${port}`);
 });

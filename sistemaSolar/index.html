@@ -24,17 +24,17 @@
         <img id="solMapa" src="assets/sol.jpg">
         <img id="mercurioMapa" src="assets/mercurio.png">
       </a-assets>      
-      <a-entity
-        id="solGeometry"
-        position="0 2.0 -1"
-        rotation="0 0 0"
-        material="src: #solMapa"        
-        
-        scale = "1 1 1"       
-        animation__1="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"
-        animation__2="property: position; to: 0 2.0 -2; loop: true; dur: 5000; dir: alternate"
-        visible="true"
-      ></a-entity>
+      <a-entity id="solGeometry1" visible="true">
+        <a-entity id="solGeometry2">
+          <a-entity id="solGeometry3">
+            <a-entity id="solGeometry4"
+              material="src: #solMapa"        
+              scale = "0.2 0.2 0.2"
+              geometry="primitive: sphere; radius: 1.0">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
       <a-entity
         id="merGeometry"
         position="0 2.0 -1"
@@ -68,7 +68,16 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();        
-        document.getElementById("solGeometry").setAttribute("geometry", `primitive: sphere; radius: ${solRaio}`);
+        //console.log(escalas.a1.periodoOrbital);
+        const a3RaioOrbital = escalas.a3.raioOrbital.max/raioOrbital.net**escalas.a3.raioOrbital.potencia;        
+        const a3PeriodoOrbital = 1000*escalas.a3.periodoOrbital.max/periodoOrbital.net**escalas.a3.periodoOrbital.potencia;
+        const a3PeriodoRotacao = 1000*escalas.a3.periodoRotacao.max/periodoRotacao.net**escalas.a3.periodoRotacao.potencia;
+        document.getElementById("solGeometry2").setAttribute("position", `0 ${escalas.a3.altura} ${-a3RaioOrbital*raioOrbital.ter**escalas.a3.raioOrbital.potencia}`);
+        document.getElementById("solGeometry3").setAttribute("rotation", `${inclinacaoEixo.ter} 0 0}`);
+        document.getElementById("solGeometry1").setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${a3PeriodoOrbital*periodoOrbital.ter**escalas.a3.periodoOrbital.potencia}; easing: linear`);
+        document.getElementById("solGeometry2").setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${a3PeriodoOrbital*periodoOrbital.ter**escalas.a3.periodoOrbital.potencia}; easing: linear`);
+        document.getElementById("solGeometry4").setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${a3PeriodoRotacao*periodoRotacao.ter**escalas.a3.periodoRotacao.potencia}; easing: linear`);
+        //animation="property: position; to: 0 2.0 -2; loop: true; dur: 5000; dir: alternate"          
     </script>
   </body>
 </html>

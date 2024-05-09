@@ -111,15 +111,11 @@ AFRAME.registerComponent('event-manager', {
     }
 
     //Novo
-    if (targetEl === this.solButtonEl) {
-      console.log('Clicou no Sol.');
-      if (targetEl.is('pressed')) {
-        console.log('Pressionado');
-        this.solGeometryEl.setAttribute("animation", {property: "position", to: '1 8 -10', dur: 2000, easing: "linear"});
-      }
-      else {
-        this.solGeometryEl.setAttribute("animation", {property: "position", to: '0 2.0 -1', dur: 2000, easing: "linear"});
-      }
+    if (targetEl === this.button1El) {
+      document.querySelector("#solGeometry1").setAttribute("animation__1", {property: "position", to: '0 2.5 -3', dur: 2000, easing: "linear"});      
+    }
+    if (targetEl === this.button2El) {      
+      document.querySelector("#solGeometry1").setAttribute("animation__1", {property: "position", to: '0 1.5 -2', dur: 2000, easing: "linear"});
     }
 
   }
