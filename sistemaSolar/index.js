@@ -29,6 +29,9 @@ io.on('connection', (socket) => {
     socket.on('stagePressed', (msg) => {
       io.emit('stagePressed', msg);
     });
+    socket.on('resetPressed', (msg) => {
+      io.emit('resetPressed', msg);
+    });
   });
 
 const port = 8080;

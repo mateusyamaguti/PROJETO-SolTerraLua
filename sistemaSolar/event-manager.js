@@ -3,10 +3,7 @@ AFRAME.registerComponent('event-manager', {
 
   init: function () {
     this.bindMethods();
-    
-    //Novo
-    this.solGeometryEl = document.querySelector('#solGeometry');
-
+        
     this.button1El = document.querySelector('#button1');
     this.button2El = document.querySelector('#button2');
     this.button3El = document.querySelector('#button3');
@@ -21,26 +18,6 @@ AFRAME.registerComponent('event-manager', {
     this.uraButtonEl = document.querySelector('#uraButton');    
     this.netButtonEl = document.querySelector('#netButton');
     this.todosButtonEl = document.querySelector('#todosButton');    
-    
-    /* this.buttonNumberToGeometry = {
-      'button1El': this.button1El,
-      'button2El': this.button2El,
-      'button3El': this.button3El,
-      'button4El': this.button4El
-    };
-
-    this.buttonPlanetToGeometry = {
-      'solButtonEl': this.solButtonEl,
-      'merButtonEl': this.merButtonEl,
-      'venButtonEl': this.venButtonEl,
-      'terButtonEl': this.terButtonEl,
-      'marButtonEl': this.marButtonEl,
-      'jupButtonEl': this.jupButtonEl,
-      'satButtonEl': this.satButtonEl,
-      'uraButtonEl': this.uraButtonEl,
-      'netButtonEl': this.netButtonEl,
-      'todosButtonEl': this.todosButtonEl
-    }; */
 
     this.button1El.addEventListener('click', this.onClick);
     this.button2El.addEventListener('click', this.onClick);
@@ -58,20 +35,18 @@ AFRAME.registerComponent('event-manager', {
     this.todosButtonEl.addEventListener('click', this.onClick);    
     
     //this.solButtonEl.addState('pressed');
-    
-    const planets = ['sol', 'mer', 'ven', 'ter', 'mar', 'jup', 'sat', 'ura', 'net'];
-    socket.on('stagePressed', (msg) => {                
-      let p = '';
-      let d;
-      for (let planet of planets) if (document.querySelector(`#${planet}Button`).is("pressed")) p = planet;
 
-      let a = `a${msg.slice(-1)}`;
+    this.planet = '';
+    
+    socket.on('stagePressed', (msg) => {                
+      let p = msg.planet;
+      let a = msg.stage;
 
       if (a == 'a4') {
         const Dpla = escalas.a3.diametroPlanetario.max/diametroPlanetario.net**escalas.a3.diametroPlanetario.potencia;          
         d = Dpla*diametroPlanetario['sol']**escalas.a3.diametroPlanetario.potencia;
-        document.querySelector(`#solGeometry4`).setAttribute("animation__1", {property: "scale", to: `${d} ${d} ${d}`, dur: 10000});
-        document.querySelector(`#solGeometry2`).setAttribute("animation__1", {property: "position", to: `0 ${escalas[a].altura} 0`, dur: 3000});      
+        document.querySelector(`#solGeometry4`).setAttribute("animation__1", {property: "scale", to: `${d} ${d} ${d}`, dur: 10000, easing: 'easeInOutQuad'});
+        document.querySelector(`#solGeometry2`).setAttribute("animation__1", {property: "position", to: `0 ${escalas[a].altura} 0`, dur: 3000, easing: 'easeInOutQuad'});      
       }
       else {
         const Dpla = escalas[a].diametroPlanetario.max/diametroPlanetario.net**escalas[a].diametroPlanetario.potencia;          
@@ -79,14 +54,18 @@ AFRAME.registerComponent('event-manager', {
                   
         if (p == 'sol') d = escalas[a].diametroSolar*Dpla*diametroPlanetario['jup']**escalas[a].diametroPlanetario.potencia;
         else d = Dpla*diametroPlanetario[p]**escalas[a].diametroPlanetario.potencia;
-        console.log(msg);
-        console.log(p);
-        document.querySelector(`#${p}Geometry4`).setAttribute("animation__1", {property: "scale", to: `${d} ${d} ${d}`, dur: 2000});
-        document.querySelector(`#${p}Geometry2`).setAttribute("animation__1", {property: "position", to: `0 ${escalas[a].altura} ${-Rorb*raioOrbital[p]**escalas[a].raioOrbital.potencia}`, dur: 2000});      
+        
+        document.querySelector(`#${p}Geometry4`).setAttribute("animation__1", {property: "scale", to: `${d} ${d} ${d}`, dur: 2000, easing: 'easeInOutQuad'});
+        document.querySelector(`#${p}Geometry2`).setAttribute("animation__1", {property: "position", to: `0 ${escalas[a].altura} ${-Rorb*raioOrbital[p]**escalas[a].raioOrbital.potencia}`, dur: 2000, easing: 'easeInOutQuad'});      
       }
-
-      //this.darkModeButtonEl.click();
-    });    
+    });
+    
+    socket.on('resetPressed', (msg) => {
+      const planets = document.querySelectorAll(".planet");
+        for (let pEl of planets) {          
+          pEl.emit("resetAnimation", null, true);
+        }
+    });
   },
 
   bindMethods: function () {
@@ -104,12 +83,9 @@ AFRAME.registerComponent('event-manager', {
       this.button3El.removeState('pressed');
       this.button4El.removeState('pressed');
       targetEl.addState('pressed');
-      //this.boxGeometryEl.object3D.visible = false;
-      //this.sphereGeometryEl.object3D.visible = false;
-      //this.torusGeometryEl.object3D.visible = false;
-      //this.buttonNumberToGeometry[targetEl.id].object3D.visible = true;
 
-      socket.emit('stagePressed', targetEl.id);   
+      let s = `a${targetEl.id.slice(-1)}`;      
+      socket.emit('stagePressed', {stage: s, planet: this.planet});   
     }
 
     if (targetEl === this.solButtonEl ||
@@ -133,7 +109,11 @@ AFRAME.registerComponent('event-manager', {
       this.netButtonEl.removeState('pressed');
       this.todosButtonEl.removeState('pressed');
       targetEl.addState('pressed');
-      //this.buttonPlanetToGeometry[targetEl.id].object3D.visible = true;
+      this.planet = targetEl.id.slice(0, 3);
+    }
+
+    if (targetEl === this.todosButtonEl) {
+      socket.emit('resetPressed', 'reset');
     }
   }
 });

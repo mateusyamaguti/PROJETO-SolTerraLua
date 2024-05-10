@@ -46,7 +46,7 @@
         <a-entity id="roomWall3" material="color: #b7be97; roughness: 1"></a-entity>
         <a-entity id="roomWall4" material="color: #b7be97; roughness: 1"></a-entity>
       </a-entity>
-      <a-entity id="solGeometry1" visible="true">
+      <a-entity id="solGeometry1" class="planet">
         <a-entity id="solGeometry2">
           <a-entity id="solGeometry3">
             <a-entity id="solGeometry4">
@@ -54,7 +54,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="merGeometry1" visible="true">
+      <a-entity id="merGeometry1" class="planet">
         <a-entity id="merGeometry2">
           <a-entity id="merGeometry3">
             <a-entity id="merGeometry4">
@@ -62,7 +62,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="venGeometry1" visible="true">
+      <a-entity id="venGeometry1" class="planet">
         <a-entity id="venGeometry2">
           <a-entity id="venGeometry3">
             <a-entity id="venGeometry4">
@@ -70,7 +70,7 @@
           </a-entity>                
         </a-entity>
       </a-entity>
-      <a-entity id="terGeometry1" visible="true">
+      <a-entity id="terGeometry1" class="planet">
         <a-entity id="terGeometry2">
           <a-entity id="terGeometry3">
             <a-entity id="terGeometry4">
@@ -78,7 +78,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="marGeometry1" visible="true">
+      <a-entity id="marGeometry1" class="planet">
         <a-entity id="marGeometry2">
           <a-entity id="marGeometry3">
             <a-entity id="marGeometry4">
@@ -86,7 +86,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="jupGeometry1" visible="true">
+      <a-entity id="jupGeometry1" class="planet">
         <a-entity id="jupGeometry2">
           <a-entity id="jupGeometry3">
             <a-entity id="jupGeometry4">
@@ -94,7 +94,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="satGeometry1" visible="true">
+      <a-entity id="satGeometry1" class="planet">
         <a-entity id="satGeometry2">
           <a-entity id="satGeometry3">
             <a-entity id="satGeometry4">
@@ -102,7 +102,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="uraGeometry1" visible="true">
+      <a-entity id="uraGeometry1" class="planet">
         <a-entity id="uraGeometry2">
           <a-entity id="uraGeometry3">
             <a-entity id="uraGeometry4">
@@ -110,7 +110,7 @@
           </a-entity>          
         </a-entity>
       </a-entity>
-      <a-entity id="netGeometry1" visible="true">
+      <a-entity id="netGeometry1" class="planet">
         <a-entity id="netGeometry2">
           <a-entity id="netGeometry3">
             <a-entity id="netGeometry4">
@@ -181,12 +181,13 @@
 
           document.getElementById(`${p}Geometry2`).setAttribute("position", `0 ${escalas.a1.altura} ${-Rorb*raioOrbital[p]**escalas.a1.raioOrbital.potencia}`);
           document.getElementById(`${p}Geometry3`).setAttribute("rotation", `${inclinacaoEixo[p]} 0 0}`);
-          document.getElementById(`${p}Geometry1`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
+          document.getElementById(`${p}Geometry1`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear; startEvents: resetAnimation`);
           document.getElementById(`${p}Geometry2`).setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
           document.getElementById(`${p}Geometry4`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Trot*periodoRotacao[p]**escalas.a1.periodoRotacao.potencia}; easing: linear`);
         }
     
-        setSky(7,7,2.7,1,40.0);
+        setSky(sala.larguraSala, sala.comprimentoSala, sala.alturaSala, sala.alturaBeiral, sala.tamanhoCeu);
+        
         function setSky (larguraSala, comprimentoSala, alturaSala, alturaBeiral, tamanhoCeu) {
           let skyWall1 = document.getElementById("skyWall1");
           let skyWall2 = document.getElementById("skyWall2");
