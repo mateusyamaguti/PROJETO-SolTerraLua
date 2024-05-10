@@ -11,13 +11,15 @@
     <script src="/button.js"></script>
     <script src="/menu.js"></script>
     <script src="/pressable.js"></script>
-    <script src="/event-manager.js"></script>
+    <script src="/event-manager.js"></script>    
     <script src="/orbitais.js"></script>
   </head>
   <body>    
     <a-scene
       info-message="htmlSrc: #messageText"
       xr-mode-ui="XRMode: xr"
+      
+      light="defaultLightsEnabled: false"
     >
       <a-assets>
         <a-asset-item id="messageText" src="/message.html"></a-asset-item>
@@ -25,7 +27,25 @@
         <img id="merMapa" src="assets/mercurio.png">
         <img id="venMapa" src="assets/venus.jpg">
         <img id="terMapa" src="assets/terra.jpg">
-      </a-assets>      
+        <img id="marMapa" src="assets/marte.jpg">
+        <img id="jupMapa" src="assets/jupiter.jpg">
+        <img id="satMapa" src="assets/saturno.jpg">
+        <img id="uraMapa" src="assets/urano.jpg">
+        <img id="netMapa" src="assets/netuno.jpg">        
+      </a-assets>     
+      <a-entity light="type: ambient; color: #ffffff; intensity: 1"></a-entity> 
+      <a-entity id="solLight" light="type: point; color: #ffffff; intensity: 1; distance: 50; decay: 1.0"></a-entity>
+      <a-entity id="ceu">        
+        <a-entity id="skyWall1" material="color: #000000; roughness: 1"></a-entity>
+        <a-entity id="skyWall2" material="color: #000000; roughness: 1"></a-entity>
+        <a-entity id="skyWall3" material="color: #000000; roughness: 1"></a-entity>
+        <a-entity id="skyWall4" material="color: #000000; roughness: 1"></a-entity>
+        <a-entity id="skyWall5" material="color: #000000; roughness: 1"></a-entity>
+        <a-entity id="roomWall1" material="color: #b7be97; roughness: 1"></a-entity>
+        <a-entity id="roomWall2" material="color: #b7be97; roughness: 1"></a-entity>
+        <a-entity id="roomWall3" material="color: #b7be97; roughness: 1"></a-entity>
+        <a-entity id="roomWall4" material="color: #b7be97; roughness: 1"></a-entity>
+      </a-entity>
       <a-entity id="solGeometry1" visible="true">
         <a-entity id="solGeometry2">
           <a-entity id="solGeometry3">
@@ -47,13 +67,53 @@
           <a-entity id="venGeometry3">
             <a-entity id="venGeometry4">
             </a-entity>
-          </a-entity>          
+          </a-entity>                
         </a-entity>
       </a-entity>
       <a-entity id="terGeometry1" visible="true">
         <a-entity id="terGeometry2">
           <a-entity id="terGeometry3">
             <a-entity id="terGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="marGeometry1" visible="true">
+        <a-entity id="marGeometry2">
+          <a-entity id="marGeometry3">
+            <a-entity id="marGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="jupGeometry1" visible="true">
+        <a-entity id="jupGeometry2">
+          <a-entity id="jupGeometry3">
+            <a-entity id="jupGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="satGeometry1" visible="true">
+        <a-entity id="satGeometry2">
+          <a-entity id="satGeometry3">
+            <a-entity id="satGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="uraGeometry1" visible="true">
+        <a-entity id="uraGeometry2">
+          <a-entity id="uraGeometry3">
+            <a-entity id="uraGeometry4">
+            </a-entity>
+          </a-entity>          
+        </a-entity>
+      </a-entity>
+      <a-entity id="netGeometry1" visible="true">
+        <a-entity id="netGeometry2">
+          <a-entity id="netGeometry3">
+            <a-entity id="netGeometry4">
             </a-entity>
           </a-entity>          
         </a-entity>
@@ -82,7 +142,7 @@
     <script type="module" src="index.js"></script> 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io();        
+        const socket = io();     
       
         //animation="property: position; to: 0 2.0 -2; loop: true; dur: 5000; dir: alternate"         
 
@@ -90,20 +150,32 @@
         setPlanet('mer');
         setPlanet('ven');
         setPlanet('ter');
+        setPlanet('mar');
+        setPlanet('jup');
+        setPlanet('sat');
+        setPlanet('ura');
+        setPlanet('net');
         
         function setPlanet (planet) {
-          const p = planet;
-          const Dpla;
+          const p = planet;                   
+          let d;
           
-          if (planet == 'sol')           
-          else Dpla = escalas.a1.diametroPlanetario.max/diametroPlanetario.net**escalas.a1.diametroPlanetario.potencia;
+          const Dpla = escalas.a1.diametroPlanetario.max/diametroPlanetario.net**escalas.a1.diametroPlanetario.potencia;
+          
           const Rorb = escalas.a1.raioOrbital.max/raioOrbital.net**escalas.a1.raioOrbital.potencia;                            
           const Ttra = 1000*escalas.a1.periodoOrbital.max/periodoOrbital.net**escalas.a1.periodoOrbital.potencia;          
           const Trot = 1000*escalas.a1.periodoRotacao.max/periodoRotacao.net**escalas.a1.periodoRotacao.potencia;
+                    
+          if (planet == 'sol') {
+            d = escalas.a1.diametroSolar*Dpla*diametroPlanetario['jup']**escalas.a1.diametroPlanetario.potencia;
+            document.getElementById("solLight").setAttribute("position", `0 ${escalas.a1.altura} 0`);
+            document.getElementById(`${p}Geometry4`).setAttribute("material", `src: #${p}Mapa`);
+          }
+          else {
+            d = Dpla*diametroPlanetario[p]**escalas.a1.diametroPlanetario.potencia;
+            document.getElementById(`${p}Geometry4`).setAttribute("material", `src: #${p}Mapa`);
+          }
           
-          const d = Dpla*diametroPlanetario[p]**escalas.a1.diametroPlanetario.potencia;
-
-          document.getElementById(`${p}Geometry4`).setAttribute("material", `src: #${p}Mapa`);
           document.getElementById(`${p}Geometry4`).setAttribute("scale", `${d} ${d} ${d}`);
           document.getElementById(`${p}Geometry4`).setAttribute("geometry", "primitive: sphere; radius: 0.5");
 
@@ -113,6 +185,45 @@
           document.getElementById(`${p}Geometry2`).setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
           document.getElementById(`${p}Geometry4`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Trot*periodoRotacao[p]**escalas.a1.periodoRotacao.potencia}; easing: linear`);
         }
+    
+        setSky(7,7,2.7,1,40.0);
+        function setSky (larguraSala, comprimentoSala, alturaSala, alturaBeiral, tamanhoCeu) {
+          let skyWall1 = document.getElementById("skyWall1");
+          let skyWall2 = document.getElementById("skyWall2");
+          let skyWall3 = document.getElementById("skyWall3");
+          let skyWall4 = document.getElementById("skyWall4");
+          let skyWall5 = document.getElementById("skyWall5");
+
+          let roomWall1 = document.getElementById("roomWall1");
+          let roomWall2 = document.getElementById("roomWall2");
+          let roomWall3 = document.getElementById("roomWall3");
+          let roomWall4 = document.getElementById("roomWall4");
+
+          skyWall1.setAttribute("geometry", `primitive: box; height: ${tamanhoCeu}; width: ${tamanhoCeu}; depth: 0.1`);
+          skyWall1.setAttribute("position", `0 ${alturaSala+tamanhoCeu/2} ${tamanhoCeu/2}`);
+          skyWall2.setAttribute("geometry", `primitive: box; height: ${tamanhoCeu}; width: ${tamanhoCeu}; depth: 0.1`);
+          skyWall2.setAttribute("position", `0 ${alturaSala+tamanhoCeu/2} ${-tamanhoCeu/2}`);
+          skyWall3.setAttribute("geometry", `primitive: box; height: ${tamanhoCeu}; width: ${tamanhoCeu}; depth: 0.1`);
+          skyWall3.setAttribute("position", `${tamanhoCeu/2} ${alturaSala+tamanhoCeu/2} 0`);
+          skyWall3.setAttribute("rotation", `0 ${90} 0`);
+          skyWall4.setAttribute("geometry", `primitive: box; height: ${tamanhoCeu}; width: ${tamanhoCeu}; depth: 0.1`);
+          skyWall4.setAttribute("position", `${-tamanhoCeu/2} ${alturaSala+tamanhoCeu/2} 0`);
+          skyWall4.setAttribute("rotation", `0 ${90} 0`);
+          skyWall5.setAttribute("geometry", `primitive: box; height: 0.1; width: ${tamanhoCeu}; depth: ${tamanhoCeu}`);
+          skyWall5.setAttribute("position", `0 ${alturaSala+tamanhoCeu} 0`);
+          
+          roomWall1.setAttribute("geometry", `primitive: box; height: ${alturaBeiral}; width: ${larguraSala}; depth: 0.1`);
+          roomWall1.setAttribute("position", `0 ${alturaSala-alturaBeiral/2} ${comprimentoSala/2}`);
+          roomWall2.setAttribute("geometry", `primitive: box; height: ${alturaBeiral}; width: ${larguraSala}; depth: 0.1`);
+          roomWall2.setAttribute("position", `0 ${alturaSala-alturaBeiral/2} ${-comprimentoSala/2}`);
+          roomWall3.setAttribute("geometry", `primitive: box; height: ${alturaBeiral}; width: ${larguraSala}; depth: 0.1`);
+          roomWall3.setAttribute("position", `${comprimentoSala/2} ${alturaSala-alturaBeiral/2} 0`);
+          roomWall3.setAttribute("rotation", `0 ${90} 0`);
+          roomWall4.setAttribute("geometry", `primitive: box; height: ${alturaBeiral}; width: ${larguraSala}; depth: 0.1`);
+          roomWall4.setAttribute("position", `${-comprimentoSala/2} ${alturaSala-alturaBeiral/2} 0`);
+          roomWall4.setAttribute("rotation", `0 ${90} 0`); 
+        }
+    
     </script>
   </body>
 </html>

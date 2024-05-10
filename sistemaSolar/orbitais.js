@@ -59,13 +59,13 @@ periodoOrbital = { //em dias
 escalas = {
     'a1': {
         'altura': 10, // [m]
-        'diametroSolar': 1.5,  //fração do diâmetro de júpiter
+        'diametroSolar': 1.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
-            'potencia': 1/2,    
-            'max': 30 // [m]
+            'potencia': 1/3,    
+            'max': 15 // [m]
         },
         'diametroPlanetario': {
-            'potencia': 1,
+            'potencia': 1/2,
             'max': 2 // [m]
         },
         'periodoRotacao': {
@@ -78,15 +78,20 @@ escalas = {
         }
     },
     'a2': {
-        'altura': 1.5, // [m]
-        'raioOrbital': 3, // [m]
-        'diametroPlanetario': 0.6, // [m]
-        'periodoRotacao': 5, // [s]
-        'periodoOrbital': 20, // [s]
+        'altura': 1.5, // [m]        
+        'diametroSolar': 1.2,  //fração do diâmetro de júpiter
+        'raioOrbital': {
+            'potencia': 0,    
+            'max': 3 // [m]
+        },
+        'diametroPlanetario': {
+            'potencia': 1/4,
+            'max': 0.6 // [m]
+        }
     },
     'a3': {
         'altura': 1.5, // [m]
-        'diametroSolar': 1.5,  //fração do diâmetro de júpiter
+        'diametroSolar': 1.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
             'potencia': 1/2,    
             'max': 3 // [m]
@@ -94,14 +99,6 @@ escalas = {
         'diametroPlanetario': {
             'potencia': 1,
             'max': 0.5 // [m]
-        },
-        'periodoRotacao': {
-            'potencia': 1/3,
-            'max': 3 // [s]
-        },
-        'periodoOrbital': {
-            'potencia': 1/3,
-            'max': 60 // [s]
         }
     },
     'a4': {'altura': 5} // [m]
