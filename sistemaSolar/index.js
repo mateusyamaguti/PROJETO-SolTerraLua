@@ -14,10 +14,10 @@ const httpsServer = createServer({
   }, app);
 const io = new Server(httpsServer);
 
-//Inclusão da pasta aframe para acesso no index.html:
-app.use('/aframe', express.static('../aframe/'));
-//Inclusão da pasta raiz deste projeto para acesso no index.html
-app.use('/', express.static('./'));
+//Inclusão das pastas:
+app.use('/aframe', express.static('./aframe/'));
+app.use('/assets', express.static('./assets/'));
+app.use('/config', express.static('./config'));
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

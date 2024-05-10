@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <title>Sistema Solar</title>
     <meta name="description" content="Sistema Solar">
-    <script src="/aframe/aframe-master.js"></script>
-    <script src="/aframe/info-message.js"></script>
-    <script src="/aframe/aframe-environment-component.min.js"></script>    
-    <script src="/color-change.js"></script>        
-    <script src="/button.js"></script>
-    <script src="/menu.js"></script>
-    <script src="/pressable.js"></script>
-    <script src="/event-manager.js"></script>    
-    <script src="/orbitais.js"></script>
+    <script src="aframe/aframe.min.js"></script>
+    <script src="aframe/info-message.js"></script>    
+    <script src="aframe/color-change.js"></script>        
+    <script src="aframe/button.js"></script>
+    <script src="aframe/menu.js"></script>
+    <script src="aframe/pressable.js"></script>
+    <script src="aframe/event-manager.js"></script>    
+    <script src="config/orbitais.js"></script>
   </head>
   <body>    
     <a-scene
       info-message="htmlSrc: #messageText"
       xr-mode-ui="XRMode: xr"
-      
+      real-world-meshing
       light="defaultLightsEnabled: false"
+      anchored="persistent: true"
     >
       <a-assets>
-        <a-asset-item id="messageText" src="/message.html"></a-asset-item>
+        <a-asset-item id="messageText" src="aframe/message.html"></a-asset-item>
         <img id="solMapa" src="assets/sol.jpg">
         <img id="merMapa" src="assets/mercurio.png">
         <img id="venMapa" src="assets/venus.jpg">
@@ -138,8 +138,7 @@
       <a-entity hand-tracking-controls="hand: left"></a-entity>
       <a-entity hand-tracking-controls="hand: right"></a-entity>
     </a-scene>
-
-    <script type="module" src="index.js"></script> 
+    
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();     
@@ -187,7 +186,7 @@
         }
     
         setSky(sala.larguraSala, sala.comprimentoSala, sala.alturaSala, sala.alturaBeiral, sala.tamanhoCeu);
-        
+
         function setSky (larguraSala, comprimentoSala, alturaSala, alturaBeiral, tamanhoCeu) {
           let skyWall1 = document.getElementById("skyWall1");
           let skyWall2 = document.getElementById("skyWall2");
