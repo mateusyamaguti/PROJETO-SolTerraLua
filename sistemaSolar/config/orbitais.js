@@ -1,6 +1,6 @@
 sala = { // todos em metros
-    'larguraSala': 7,
-    'comprimentoSala': 7,
+    'larguraSala': 3,
+    'comprimentoSala': 7.5,
     'alturaSala': 5,
     'alturaBeiral': 3,
     'tamanhoCeu': 90

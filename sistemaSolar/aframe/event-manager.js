@@ -18,6 +18,8 @@ AFRAME.registerComponent('event-manager', {
     this.uraButtonEl = document.querySelector('#uraButton');    
     this.netButtonEl = document.querySelector('#netButton');
     this.todosButtonEl = document.querySelector('#todosButton');    
+    this.startButtonEl = document.querySelector('#startButton');    
+    this.menuEl = document.querySelector('#menu');    
 
     this.button1El.addEventListener('click', this.onClick);
     this.button2El.addEventListener('click', this.onClick);
@@ -33,7 +35,8 @@ AFRAME.registerComponent('event-manager', {
     this.uraButtonEl.addEventListener('click', this.onClick);
     this.netButtonEl.addEventListener('click', this.onClick);
     this.todosButtonEl.addEventListener('click', this.onClick);    
-    
+    this.startButtonEl.addEventListener('click', this.onClick);    
+      
     //this.solButtonEl.addState('pressed');
 
     this.planet = '';
@@ -74,7 +77,16 @@ AFRAME.registerComponent('event-manager', {
   },
 
   onClick: function (evt) {
+
     var targetEl = evt.target;
+
+    if (targetEl === this.startButtonEl) {
+      /* let menuButtons = document.querySelector(".menu");
+      for (let b of menuButtons) b.setAttribute("visible", "true"); */
+      this.menuEl.setAttribute('position', "0 1.0 -0.525");
+      this.startButtonEl.addState('pressed');
+    }
+
     if (targetEl === this.button1El ||
         targetEl === this.button2El ||
         targetEl === this.button3El ||
