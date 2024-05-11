@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Sistema Solar</title>
     <meta name="description" content="Sistema Solar">
-    <script src="aframe/aframe.min.js"></script>
+    <script src="aframe/aframe-locals.js"></script>
     <script src="aframe/info-message.js"></script>    
     <script src="aframe/color-change.js"></script>        
     <script src="aframe/button.js"></script>
@@ -17,9 +17,8 @@
     <a-scene
       info-message="htmlSrc: #messageText"
       xr-mode-ui="XRMode: xr"
-      real-world-meshing
+      
       light="defaultLightsEnabled: false"
-      anchored="persistent: true"
     >
       <a-assets>
         <a-asset-item id="messageText" src="aframe/message.html"></a-asset-item>
@@ -33,9 +32,8 @@
         <img id="uraMapa" src="assets/urano.jpg">
         <img id="netMapa" src="assets/netuno.jpg">        
       </a-assets>     
-      <a-entity light="type: ambient; color: #ffffff; intensity: 1"></a-entity> 
-      <a-entity id="solLight" light="type: point; color: #ffffff; intensity: 1; distance: 50; decay: 1.0"></a-entity>
-      <a-entity id="ceu">        
+      <a-entity light="type: ambient; color: #ffffff; intensity: 1" anchored="persistent: true"></a-entity>       
+      <a-entity id="ceu" anchored="persistent: true">        
         <a-entity id="skyWall1" material="color: #000000; roughness: 1"></a-entity>
         <a-entity id="skyWall2" material="color: #000000; roughness: 1"></a-entity>
         <a-entity id="skyWall3" material="color: #000000; roughness: 1"></a-entity>
@@ -45,81 +43,84 @@
         <a-entity id="roomWall2" material="color: #b7be97; roughness: 1"></a-entity>
         <a-entity id="roomWall3" material="color: #b7be97; roughness: 1"></a-entity>
         <a-entity id="roomWall4" material="color: #b7be97; roughness: 1"></a-entity>
-      </a-entity>
-      <a-entity id="solGeometry1" class="planet">
-        <a-entity id="solGeometry2">
-          <a-entity id="solGeometry3">
-            <a-entity id="solGeometry4">
-            </a-entity>
-          </a-entity>          
+      </a-entity>      
+      <a-entity id="space" anchored="persistent: true">
+        <a-entity id="solLight" light="type: point; color: #ffffff; intensity: 1; distance: 50; decay: 1.0"></a-entity>
+        <a-entity id="solGeometry1" class="planet" >
+          <a-entity id="solGeometry2">
+            <a-entity id="solGeometry3">
+              <a-entity id="solGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="merGeometry1" class="planet">
-        <a-entity id="merGeometry2">
-          <a-entity id="merGeometry3">
-            <a-entity id="merGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="merGeometry1" class="planet">
+          <a-entity id="merGeometry2">
+            <a-entity id="merGeometry3">
+              <a-entity id="merGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="venGeometry1" class="planet">
-        <a-entity id="venGeometry2">
-          <a-entity id="venGeometry3">
-            <a-entity id="venGeometry4">
-            </a-entity>
-          </a-entity>                
+        <a-entity id="venGeometry1" class="planet">
+          <a-entity id="venGeometry2">
+            <a-entity id="venGeometry3">
+              <a-entity id="venGeometry4">
+              </a-entity>
+            </a-entity>                
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="terGeometry1" class="planet">
-        <a-entity id="terGeometry2">
-          <a-entity id="terGeometry3">
-            <a-entity id="terGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="terGeometry1" class="planet">
+          <a-entity id="terGeometry2">
+            <a-entity id="terGeometry3">
+              <a-entity id="terGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="marGeometry1" class="planet">
-        <a-entity id="marGeometry2">
-          <a-entity id="marGeometry3">
-            <a-entity id="marGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="marGeometry1" class="planet">
+          <a-entity id="marGeometry2">
+            <a-entity id="marGeometry3">
+              <a-entity id="marGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="jupGeometry1" class="planet">
-        <a-entity id="jupGeometry2">
-          <a-entity id="jupGeometry3">
-            <a-entity id="jupGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="jupGeometry1" class="planet">
+          <a-entity id="jupGeometry2">
+            <a-entity id="jupGeometry3">
+              <a-entity id="jupGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="satGeometry1" class="planet">
-        <a-entity id="satGeometry2">
-          <a-entity id="satGeometry3">
-            <a-entity id="satGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="satGeometry1" class="planet">
+          <a-entity id="satGeometry2">
+            <a-entity id="satGeometry3">
+              <a-entity id="satGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="uraGeometry1" class="planet">
-        <a-entity id="uraGeometry2">
-          <a-entity id="uraGeometry3">
-            <a-entity id="uraGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="uraGeometry1" class="planet">
+          <a-entity id="uraGeometry2">
+            <a-entity id="uraGeometry3">
+              <a-entity id="uraGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
-      </a-entity>
-      <a-entity id="netGeometry1" class="planet">
-        <a-entity id="netGeometry2">
-          <a-entity id="netGeometry3">
-            <a-entity id="netGeometry4">
-            </a-entity>
-          </a-entity>          
+        <a-entity id="netGeometry1" class="planet">
+          <a-entity id="netGeometry2">
+            <a-entity id="netGeometry3">
+              <a-entity id="netGeometry4">
+              </a-entity>
+            </a-entity>          
+          </a-entity>
         </a-entity>
       </a-entity>
       
-      <a-entity id="menu" menu="width:0.4; height:0.4" position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
+      <a-entity id="menu" menu="width:0.4; height:0.4" position="0 1.5 -0.5" rotation="-45 0 0" event-manager anchored="persistent: true">
         <a-entity id="button1" button="label: 1; width: 0.05" position="-0.15 0.16 0"></a-entity>
         <a-entity id="button2" button="label: 2; width: 0.05" position="-0.05 0.16 0"></a-entity>
         <a-entity id="button3" button="label: 3; width: 0.05" position=" 0.05 0.16 0"></a-entity>
@@ -179,7 +180,7 @@
           document.getElementById(`${p}Geometry4`).setAttribute("geometry", "primitive: sphere; radius: 0.5");
 
           document.getElementById(`${p}Geometry2`).setAttribute("position", `0 ${escalas.a1.altura} ${-Rorb*raioOrbital[p]**escalas.a1.raioOrbital.potencia}`);
-          document.getElementById(`${p}Geometry3`).setAttribute("rotation", `${inclinacaoEixo[p]} 0 0}`);
+          document.getElementById(`${p}Geometry3`).setAttribute("rotation", `${inclinacaoEixo[p]} 0 0`);
           document.getElementById(`${p}Geometry1`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear; startEvents: resetAnimation`);
           document.getElementById(`${p}Geometry2`).setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas.a1.periodoOrbital.potencia}; easing: linear`);
           document.getElementById(`${p}Geometry4`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Trot*periodoRotacao[p]**escalas.a1.periodoRotacao.potencia}; easing: linear`);

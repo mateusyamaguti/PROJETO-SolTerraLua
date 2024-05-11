@@ -60,10 +60,11 @@ AFRAME.registerComponent('event-manager', {
       }
     });
     
-    socket.on('resetPressed', (msg) => {
+    socket.on('resetPressed', (msg) => {      
       const planets = document.querySelectorAll(".planet");
         for (let pEl of planets) {          
-          pEl.emit("resetAnimation", null, true);
+          pEl.setAttribute("rotation", "0 0 0");
+          pEl.emit("resetAnimation", null, true);          
         }
     });
   },

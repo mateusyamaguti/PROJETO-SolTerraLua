@@ -123,3 +123,25 @@ httpsServer.listen(port, () => {
 ```
 
 5) O servidor deverá ser inicializado com `node index.js`.
+
+## Sobre ancoragem no A-Frame
+
+- Para ancorar objetos ao mundo real, deve-se incluir a opção `anchored="persistent: true"` a uma `<a-entity>`. A princípio não funciona para uma `<a-entity>` que encapsule toda a cena. Tem que ancorar cada objeto individualmente ou ir testando para grupos de objetos.
+- Com a ancoragem setada, mesmo deixando o oculus no modo descanso e/ou reabrindo o browser, a ancoragem é mantida. Salvo alguns bugs que ocorrem de vez em quando. Para evitá-los, o ideal é não deixar o oculus entrar em modo sleep.
+- Para recentralizar os objetos e assim restabelecer uma nova ancoragem, deve limpar o cache do browser e restabelecer uma nova centralização pelo comando do próprio oculus (ícone de setas cima/baixo-esquerda/direita).
+
+## Sobre o modo sleep do óculos Meta Quest
+
+- Ir em settings e fazer a busca com a ferramenta de lupa pela palavra *power*. Setar os tempos de sleep e descanso para um tempo longo o suficiente para que o óculos não desligue no intervalo de troca de usuários.
+
+- Para entrar no modo sleep mesmo antes do tempo automático, basta clicar no botão físico de ligar.
+
+## Check-list de configuração dos óculos
+
+- Configurar o hand tracking.
+- Configurar o passthrough.
+- Configurar o power sleep.
+
+## Tarefas faltantes
+
+- Deixar a cor do beiral diferente entre os pares de pardes para deixar menos homogêneo. Usar cores mais cinzas e talvez mais escuras.
