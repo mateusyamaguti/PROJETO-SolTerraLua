@@ -1,22 +1,22 @@
 sala = { // todos em metros
-    'larguraSala': 3,
-    'comprimentoSala': 7.5,
-    'alturaSala': 5,
-    'alturaBeiral': 3,
-    'tamanhoCeu': 90
+    'larguraSala': 7,
+    'comprimentoSala': 7,
+    'alturaSala': 3,
+    'alturaBeiral': 1,
+    'tamanhoCeu': 40
 }
 
 escalas = {
     'a1': {
-        'altura': 45, // [m]
+        'altura': 10, // [m]
         'diametroSolar': 1.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
             'potencia': 1,    
-            'max': 40 // [m]
+            'max': 27 // [m]]
         },
         'diametroPlanetario': {
-            'potencia': 1/5,
-            'max': 0.25 // [m]
+            'potencia': 1/8,
+            'max': 0.1 // [m]
         },
         'periodoRotacao': {
             'potencia': 1/6,
@@ -28,30 +28,46 @@ escalas = {
         }
     },
     'a2': {
-        'altura': 1.5, // [m]        
+        'altura': 1.3, // [m]        
         'diametroSolar': 1.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
-            'potencia': 0,    
+            'potencia': 1/6,    
             'max': 3 // [m]
         },
         'diametroPlanetario': {
-            'potencia': 1/4,
-            'max': 0.6 // [m]
+            'potencia': 1/6,
+            'max': 0.5 // [m]
+        },
+        'periodoRotacao': {
+            'potencia': 1/6,
+            'max': 4 // [s]
+        },
+        'periodoOrbital': {
+            'potencia': 1/6,
+            'max': 60 // [s]
         }
     },
     'a3': {
-        'altura': 1.5, // [m]
-        'diametroSolar': 1.2,  //fração do diâmetro de júpiter
+        'altura': 1.3, // [m]
+        'diametroSolar': 0.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
-            'potencia': 1/5,    
-            'max': 3.5 // [m]
+            'potencia': 1/2,    
+            'max': 3 // [m]
         },
         'diametroPlanetario': {
             'potencia': 1,
-            'max': 0.5 // [m]
+            'max': 0.2 // [m]
+        },
+        'periodoRotacao': {
+            'potencia': 1/6,
+            'max': 4 // [s]
+        },
+        'periodoOrbital': {
+            'potencia': 1/6,
+            'max': 120 // [s]
         }
     },
-    'a4': {'altura': 13} // [m]
+    'a4': {'altura': 5} // [m]
 };
 
 raioOrbital = { //em UA
@@ -73,6 +89,7 @@ diametroPlanetario = { //em km
     'mar': 6792,
     'jup': 142984,
     'sat': 120536,
+    'sat_ring': 2.27, //em unidades de diâmetro de saturno
     'ura': 51118,
     'net': 49528
 };

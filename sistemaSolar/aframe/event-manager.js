@@ -54,12 +54,25 @@ AFRAME.registerComponent('event-manager', {
       else {
         const Dpla = escalas[a].diametroPlanetario.max/diametroPlanetario.net**escalas[a].diametroPlanetario.potencia;          
         const Rorb = escalas[a].raioOrbital.max/raioOrbital.net**escalas[a].raioOrbital.potencia;
-                  
+        const Ttra = 1000*escalas[a].periodoOrbital.max/periodoOrbital.net**escalas[a].periodoOrbital.potencia;          
+        const Trot = 1000*escalas[a].periodoRotacao.max/periodoRotacao.net**escalas[a].periodoRotacao.potencia;
+
         if (p == 'sol') d = escalas[a].diametroSolar*Dpla*diametroPlanetario['jup']**escalas[a].diametroPlanetario.potencia;
         else d = Dpla*diametroPlanetario[p]**escalas[a].diametroPlanetario.potencia;
         
         document.querySelector(`#${p}Geometry4`).setAttribute("animation__1", {property: "scale", to: `${d} ${d} ${d}`, dur: 2000, easing: 'easeInOutQuad'});
         document.querySelector(`#${p}Geometry2`).setAttribute("animation__1", {property: "position", to: `0 ${escalas[a].altura} ${-Rorb*raioOrbital[p]**escalas[a].raioOrbital.potencia}`, dur: 2000, easing: 'easeInOutQuad'});      
+
+        document.getElementById(`${p}Geometry1`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas[a].periodoOrbital.potencia}; easing: linear; startEvents: resetAnimation${p}`);
+        document.getElementById(`${p}Geometry2`).setAttribute("animation", `property: rotation; to: 0 -360 0; loop: true; dur: ${Ttra*periodoOrbital[p]**escalas[a].periodoOrbital.potencia}; easing: linear; startEvents: resetAnimation${p}`);
+        document.getElementById(`${p}Geometry4`).setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${Trot*periodoRotacao[p]**escalas[a].periodoRotacao.potencia}; easing: linear; startEvents: resetAnimation${p}`);
+
+        document.getElementById(`${p}Geometry1`).setAttribute("rotation", "0 0 0");
+        document.getElementById(`${p}Geometry2`).setAttribute("rotation", "0 0 0");
+        document.getElementById(`${p}Geometry4`).setAttribute("rotation", "0 0 0");
+        document.getElementById(`${p}Geometry1`).emit(`resetAnimation${p}`);
+        document.getElementById(`${p}Geometry2`).emit(`resetAnimation${p}`);
+        document.getElementById(`${p}Geometry4`).emit(`resetAnimation${p}`);
       }
     });
     
@@ -67,7 +80,7 @@ AFRAME.registerComponent('event-manager', {
       const planets = document.querySelectorAll(".planet");
         for (let pEl of planets) {          
           pEl.setAttribute("rotation", "0 0 0");
-          pEl.emit("resetAnimation", null, true);          
+          pEl.emit(`resetAnimation${pEl.id.slice(0,3)}`, null, true);          
         }
     });
   },
@@ -83,7 +96,7 @@ AFRAME.registerComponent('event-manager', {
     if (targetEl === this.startButtonEl) {
       /* let menuButtons = document.querySelector(".menu");
       for (let b of menuButtons) b.setAttribute("visible", "true"); */
-      this.menuEl.setAttribute('position', "0 1.0 -0.525");
+      this.menuEl.setAttribute('position', "0 1.2 -0.525");
       this.startButtonEl.addState('pressed');
     }
 
