@@ -31,8 +31,8 @@
         <img id="aneMapa" src="assets/aneis_saturno.png">
         <img id="uraMapa" src="assets/urano.jpg">
         <img id="netMapa" src="assets/netuno.jpg">        
-        <audio id="spaceSound" src="assets/space.wav"></audio>
-        <audio id="sunSound" src="assets/sun.wav"></audio>
+        <audio id="spaceSound" src="assets/space.wav" preload="auto"></audio>
+        <audio id="sunSound" src="assets/sun.wav" preload="auto"></audio>
       </a-assets>     
       <a-entity light="type: ambient; color: #ffffff; intensity: 0.02" anchored="persistent: true"></a-entity>       
       <a-entity id="ceu" anchored="persistent: true">        
@@ -52,7 +52,7 @@
             <a-entity id="solGeometry3">
               <a-entity id="solGeometry4">
                 <a-entity id="solLight">
-                  <a-entity light="type: point; color: #ffffff; intensity: 1.5; distance: 50; castShadow:true"></a-entity>
+                  <a-entity light="type: point; color: #ffffff; intensity: 1.5; castShadow:true"></a-entity>
                 </a-entity>
               </a-entity>
             </a-entity>          
@@ -176,6 +176,8 @@
         //Aneis de Saturno:
         document.getElementById('satUpRinGeometry').setAttribute("geometry", `primitive: circle; radius: ${diametroPlanetario.sat_ring/2}`);
         document.getElementById('satDownRinGeometry').setAttribute("geometry", `primitive: circle; radius: ${diametroPlanetario.sat_ring/2}`);
+        document.getElementById('satUpRinGeometry').setAttribute("shadow", "cast: false");
+        document.getElementById('satDownRinGeometry').setAttribute("shadow", "cast: false");
         
         function setPlanet (planet) {
           const p = planet;                   
@@ -190,7 +192,8 @@
           if (planet == 'sol') {
             d = escalas.a1.diametroSolar*Dpla*diametroPlanetario['jup']**escalas.a1.diametroPlanetario.potencia;
             document.getElementById(`${p}Geometry4`).setAttribute("material", `src: #${p}Mapa, emissiveIntensity: 0.5; emissive: #f7e927`);
-            document.getElementById(`${p}Geometry4`).setAttribute("sound", "src: #sunSound; autoplay: true; loop: true; refDistance: 0.3; rolloffFactor:4; volume: 1.0");
+            document.getElementById(`${p}Geometry4`).setAttribute("sound", "src: #sunSound; autoplay: true; loop: true; refDistance: 0.15; rolloffFactor:10; volume: 1.0");
+            document.getElementById(`${p}Geometry4`).setAttribute("shadow", "cast: false");
           }
           else {
             d = Dpla*diametroPlanetario[p]**escalas.a1.diametroPlanetario.potencia;
