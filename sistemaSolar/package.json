@@ -4,7 +4,7 @@
     "description": "Exposição do Sistema Solar em Realidade Virtual",
     "type": "module",
     "dependencies": {
-        "express": "^4.19.2",
-        "socket.io": "^4.7.5"
+        "express": "^4.21.0",
+        "socket.io": "^4.8.0"
     }
 }

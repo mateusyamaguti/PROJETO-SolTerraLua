@@ -1,8 +1,37 @@
 # Aplicação AR multiplayer Sistema Solar
 
-As bibliotecas ou frameworks que estão sendo testados são:
-- [Three.js](https://threejs.org/)
+> Status do Projeto: Projeto em fase de desenvolvimento
+
+## Tópicos
+
+## Objetivo
+Este projeto tem como objetivo criar uma experiência educacional multiplayer que visa ensinar de forma interativa o funcionamento do sistema solar.
+
+## Tecnologias, biblioteca e frameworks
+
+- ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 - [A-Frame](https://aframe.io/)
+
+## A-Frame
+"A-Frame é uma estrutura web para construir experiências de realidade virtual (VR). A-Frame é baseado em HTML, o que o torna simples de começar. Mas o A-Frame não é apenas um gráfico de cena 3D ou uma linguagem de marcação, seu núcleo é uma estrutura poderosa de entidade-componente que fornece uma estrutura declarativa, extensível e componível para three.js" (AFRAME, 2023, tradução nossa).
+
+### Modelo de projeto A-Frame
+Sugere-se para iniciar um projeto A-Frame a estruturação de pastas da seguinte forma.<br>
+![ExemplodeOrganizaçãoDeProjetoAframe](/exemploOrganizacaoDeProjetosAframe.png)
+
+### Desenvolvimento baseado em componentes (ECS)
+Para construir aplicativos de realidade aumentada (Virtual Real, VR), recomendamos colocar todo o código do aplicativo dentro de componentes, pois uma base de código A-Frame ideal consiste puramente em componentes modulares, encapsulados e desacoplados. Esses componentes podem ser testados em unidade isoladamente ou junto com outros componentes.
+
+### Começando com A-Frame
+O A-fram
+
+### 
+
+
+
+
+
 
 
 ## Pré-requisitos
