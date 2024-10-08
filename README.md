@@ -1,11 +1,13 @@
-# Aplicação AR multiplayer Sistema Solar
+# Aplicação AR Multiplayer Sistema Solar
 
 > Status do Projeto: Projeto em fase de desenvolvimento
 
 ## Tópicos
 
 ## Objetivo
-Este projeto tem como objetivo criar uma experiência educacional multiplayer que visa ensinar de forma interativa o funcionamento do sistema solar.
+
+Este projeto tem como objetivo criar uma experiência educacional multiplayer que visa ensinar de forma interativa o funcionamento do sistema solar.<br>
+Inicialmente faremos uma breve introdução ao conceito do web framweork A-Frame, para então apresentar a aplicação de Realidade Aumentada (AR) Multiplayer Sistema Solar.
 
 ## Tecnologias, biblioteca e frameworks
 
@@ -14,48 +16,110 @@ Este projeto tem como objetivo criar uma experiência educacional multiplayer qu
 - [A-Frame](https://aframe.io/)
 
 ## A-Frame
-"A-Frame é uma estrutura web para construir experiências de realidade virtual (VR). A-Frame é baseado em HTML, o que o torna simples de começar. Mas o A-Frame não é apenas um gráfico de cena 3D ou uma linguagem de marcação, seu núcleo é uma estrutura poderosa de entidade-componente que fornece uma estrutura declarativa, extensível e componível para three.js" (AFRAME, 2023, tradução nossa).
+
+"A-Frame é um web framweork para construir experiências de realidade virtual (VR). A-Frame é baseado em HTML, o que o torna simples de começar. Mas o A-Frame não é apenas um gráfico de cena 3D ou uma linguagem de marcação, seu núcleo é uma estrutura poderosa de entidade-componente que fornece uma estrutura declarativa, extensível e componível para three.js" (AFRAME, 2023, tradução nossa).
 
 ### Modelo de projeto A-Frame
 Sugere-se para iniciar um projeto A-Frame a estruturação de pastas da seguinte forma.<br>
 ![ExemplodeOrganizaçãoDeProjetoAframe](/exemploOrganizacaoDeProjetosAframe.png)
 
 ### Desenvolvimento baseado em componentes (ECS)
+
 Para construir aplicativos de realidade aumentada (Virtual Real, VR), recomendamos colocar todo o código do aplicativo dentro de componentes, pois uma base de código A-Frame ideal consiste puramente em componentes modulares, encapsulados e desacoplados. Esses componentes podem ser testados em unidade isoladamente ou junto com outros componentes.
 
 ### Começando com A-Frame
-O A-fram
 
-### 
+O A-Frame pode ser desenvolvido a partir de um arquivo simples em HTML e pode ser executado facilmente na maioria dos navegadores. Para poder fazer uso do A-Frame, basta importa-lo no `head` do arquivo HTML com o seguinte código: `<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>`<br>
+Um exemplo simples de arquivo A-Frame pode ser observado a seguir:
+
+```
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>A-frame</title>
+
+      <!-- Importação da biblioteca A-Frame -->
+      <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+  </head>
+
+  <body>
+      <!-- Exemplo básico de objetos A-frame -->
+      <a-scene>
+        <a-camera position="0 1.6 0">
+            <a-cursor></a-cursor>
+        </a-camera>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="#ECECEC"></a-sky>
+      </a-scene>
+  </body>
+</html>
+```
+
+### Executar projeto A-Frame em servidor local
+
+Pode-se executar a estrutura básica de um projeto A-Frame da seguinte forma:
+1) Acesse pelo terminal do computador o diretório em que o projeto está alocado.
+2) Execute o comando `npm i -g five-server@latest && five-server --port=8000`.
+3) A partir disso abra o navegador e acesse `http://127.0.0.1:8000/`.
+4) Por fim, escolha o arquivo HTML a ser executado.
 
 
+## Multiplayer Sistema Solar
 
-
-
-
+A partir deste ponto pretende-se apresentar a documentação dos projeto de Realidade Aumentada (AR) Multiplayer Sistema Solar.
 
 ## Pré-requisitos
 
 Para iniciar o servidor em https são necessários os seguintes pré-requisitos:
-1) Instalar o pacote node http-server caso ainda não esteja instalado: `npm install --global http-server`
-2) Ter um certificado SSL. Para criar um, rodar o comando: `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem`. O certificado terá validade pelo número de `days` indicado (3650, no exemplo).
+1. __http-server__:
+    1. Para instalar o pacote node __http-server__ caso ainda não esteja instalado basta executar o comando: `npm install --global http-server`
+2. Ter um certificado SSL. 
+    1. Para criar um certificado SSL execute o comando: `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem`. 
+    2. O certificado terá validade pelo número de `days` indicado (3650, no exemplo).
 
 ## Transmissão do servidor para os clientes
 
-Para transmitir em rede local via wi-fi hotspot do computador do servidor para as máquinas clientes é necessário:
+Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do servidor para as máquinas clientes é necessário realizar sua configuração:
 
-1) Ligar o Wi-Fi Hotspot na configuração wifi do ubuntu. É possível, também, ligá-lo pela linha de comando com `nmcli connection up <SSID>`, em que `<SSID>` é o nome da rede. 
-2) Iniciar o servidor em https com o comando: `http-server -S -C cert.pem -o`
-3) O `http-server` fornece dois endereços. Somente o endereço mais curto é acessível do cliente conectado na rede wi-fi hotspot do servidor. Exemplo: `https://10.42.0.1:8080`
-4) No dispositivo cliente, conectar na rede hotspot do servidor (se tiver acesso a 4G, desabilitá-lo, senão ele vai tentar conectar no 4G para buscar internet).
-5) Acessar o endereço informado no passo 3. No primeiro acesso, apesar do https, o browser informará que a conexão não é segura. Basta entrar na opção de modo inseguro e nas próximas vezes essa confirmação não será mais solicitada.
+### Distribuição Windows
+
+#### __Configuração por Prompt de Comando (CMD)__
+
+1. Abrao CMD como administrador.
+2. Configure o hotspot com o nome da rede (SSID) e a senha (key) com o comando: `netsh wlan set hostednetwork mode=allow ssid=NomeDaRede key=SenhaDaRede`.
+    1. ssid=NomeDaRede: Defina o nome da sua rede Wi-Fi.
+    2. key=SenhaDaRede: Defina a senha da rede Wi-Fi
+3. Inicie o hotspot com o seguinte comando: `netsh wlan start hostednetwork`
+
+#### __Configuração via Configurações do Windows__
+
+1. Acesse as configurações do windowns ou pressione `windows + i`.
+2. Acesse as configurações de rede e internet.
+3. Acesse hotspot móvel e realize a configuração de nome e senha da rede.
+4. Libere o acesso.
+
+
+### Distribuição Linux
+
+1. Ligue o Wi-Fi Hotspot na configuração wifi do ubuntu. É possível, também, ligá-lo pela linha de comando com `nmcli connection up <SSID>`, em que `<SSID>` é o nome da rede. 
+2. Iniciar o servidor em https com o comando: `http-server -S -C cert.pem -o`
+3. O `http-server` fornece dois endereços. Somente o endereço mais curto é acessível do cliente conectado na rede wi-fi hotspot do servidor. Exemplo: `https://10.42.0.1:8080`
+4. No dispositivo cliente, conectar na rede hotspot do servidor (se tiver acesso a 4G, desabilitá-lo, senão ele vai tentar conectar no 4G para buscar internet).
+5. Acessar o endereço informado no passo 3. No primeiro acesso, apesar do https, o browser informará que a conexão não é segura. Basta entrar na opção de modo inseguro e nas próximas vezes essa confirmação não será mais solicitada.
 
 ### Dificuldades com o Linux Mint
 
-As instruções acima funcionam bem com o Ubuntu, mas no Mint tive dificuldades. Consegui rodar o servidor da seguinte maneira:
+As instruções acima funcionam bem com a distribuição Ubuntu do Linux, mas na versão Mint pode ocorrer algumas dificuldades. Para contornar esse problemas pode-se rodar o servidor da seguinte maneira:
 
-- Editar a conexão de rede e escolher Hotspot(ou ponto de acesso em PT) em Wi-Fi mode. Em Wi-fi Security, usar Enhanced Open. Nenhum protocolo de segurança funcionou, por isso tive que deixar aberto.
-- No navegador do oculus quest escrever o endereço completo sem esquecer do https, por exemplo: `https://10.42.0.1:8080`
+1. Editar a conexão de rede e escolher Hotspot(ou ponto de acesso em PT) em Wi-Fi mode. 
+2. Em Wi-fi Security, usar Enhanced Open. (Observação: Nenhum protocolo de segurança funcionou, por isso tivemos que deixar aberto).
+3. No navegador do oculus quest escreva o endereço completo sem esquecer do https, por exemplo: `https://10.42.0.1:8080`
 
 ## Organização das pastas
 
