@@ -1,14 +1,14 @@
 sala = { // todos em metros
-    'larguraSala': 7,
-    'comprimentoSala': 7,
-    'alturaSala': 3,
+    'larguraSala': 10,
+    'comprimentoSala': 12,
+    'alturaSala': 3.6,
     'alturaBeiral': 1,
-    'tamanhoCeu': 40
+    'tamanhoCeu': 50
 }
 
 escalas = {
     'a1': {
-        'altura': 10, // [m]
+        'altura': 13, // [m]
         'diametroSolar': 1.2,  //fração do diâmetro de júpiter
         'raioOrbital': {
             'potencia': 1,    
