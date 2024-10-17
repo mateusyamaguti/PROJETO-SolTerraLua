@@ -78,10 +78,10 @@ A partir deste ponto pretende-se apresentar a documentação dos projeto de Real
 
 Para iniciar o servidor em https são necessários os seguintes pré-requisitos:
 1. __http-server__:
-    1. Para instalar o pacote node __http-server__ caso ainda não esteja instalado basta executar o comando: `npm install --global http-server`
+    - Para instalar o pacote node __http-server__ caso ainda não esteja instalado basta executar o comando: `npm install --global http-server`
 2. Ter um certificado SSL. 
-    1. Para criar um certificado SSL execute o comando: `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem`. 
-    2. O certificado terá validade pelo número de `days` indicado (3650, no exemplo).
+    - Para criar um certificado SSL execute o comando: `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem`. 
+    - O certificado terá validade pelo número de `days` indicado (3650, no exemplo).
 
 ## Transmissão do servidor para os clientes
 
@@ -93,8 +93,8 @@ Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do
 
 1. Abrao CMD como administrador.
 2. Configure o hotspot com o nome da rede (SSID) e a senha (key) com o comando: `netsh wlan set hostednetwork mode=allow ssid=NomeDaRede key=SenhaDaRede`.
-    1. ssid=NomeDaRede: Defina o nome da sua rede Wi-Fi.
-    2. key=SenhaDaRede: Defina a senha da rede Wi-Fi
+    - ssid=NomeDaRede: Defina o nome da sua rede Wi-Fi.
+    - key=SenhaDaRede: Defina a senha da rede Wi-Fi
 3. Inicie o hotspot com o seguinte comando: `netsh wlan start hostednetwork`
 
 #### __Configuração via Configurações do Windows__
@@ -103,6 +103,14 @@ Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do
 2. Acesse as configurações de rede e internet.
 3. Acesse hotspot móvel e realize a configuração de nome e senha da rede.
 4. Libere o acesso.
+
+#### __Dificuldade encontrada no Windows__
+Pode ser que em algumas versões do windows exista uma dificuldade de executar o hotspot wifi. Para isso deve-se fazer um check-up inicial e verificar se o driver aceita hospoder rede.
+
+1. Verificar se hospedagem de rede: `netsh wlan show drivers`
+2. Verifique se a resposta em __Hosted network supported"__ é YES
+3. Se for NÃO, tente entrar no gerenciador de dispositivo e atualizar os adaptadores de rede
+4. Caso o adaptador de rede ainda não permita o Hotspot como servidor, tente instalar algum desses drives "Microsoft Hosted Network Virtual Adapter" ou "Microsoft Virtual WiFi Miniport Adapter."
 
 
 ### Distribuição Linux
@@ -113,7 +121,15 @@ Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do
 4. No dispositivo cliente, conectar na rede hotspot do servidor (se tiver acesso a 4G, desabilitá-lo, senão ele vai tentar conectar no 4G para buscar internet).
 5. Acessar o endereço informado no passo 3. No primeiro acesso, apesar do https, o browser informará que a conexão não é segura. Basta entrar na opção de modo inseguro e nas próximas vezes essa confirmação não será mais solicitada.
 
-### Dificuldades com o Linux Mint
+#### __Configurar Hotspot pelo terminal__
+Em alguns casos pode ser necessário redefinir as configurações do Hotspot do seu computador pelo terminal de comando do Linux, para isso basta seguir os passos:
+1. Execute o comando `ifconfig -a` para encontrar o nome da interface de rede de seu computador, geralmente ela aparece no último tópico e inicia-se com `wl`.
+2. Crie seu Hotspot com a execução do comando: `nmcli dev wifi hotspot ifname <interface> ssid <nome_do_hotspot> password <senha>`. 
+    - Observe o exemplo: `nmcli dev wifi hotspot ifname wlan0 ssid MeuHotspot password minhaSenha123`
+3. Inicie o Hotspot com o comando `nmcli dev wifi hotspot ifname <interface> ssid <nome_do_hotspot> password <senha>`
+Observação: Caso a conexão com o hotspot não funcione, reinicie o serviço com `sudo systemctl restart NetworkManager` e tente novamente. 
+
+#### __Dificuldades com o Linux Mint__
 
 As instruções acima funcionam bem com a distribuição Ubuntu do Linux, mas na versão Mint pode ocorrer algumas dificuldades. Para contornar esse problemas pode-se rodar o servidor da seguinte maneira:
 
