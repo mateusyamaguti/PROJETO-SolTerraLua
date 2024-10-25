@@ -3,6 +3,9 @@
 > Status do Projeto: Projeto em fase de desenvolvimento
 
 ## Tópicos
+- [Objetivo](#Objetivo)
+- [Tecnologias, biblioteca e frameworks](#Tecnologias-biblioteca-e-frameworks)
+- [Multiplayer Sistema Solar](#Multiplayer-Sistema-Solar)
 
 ## Objetivo
 
@@ -97,7 +100,7 @@ Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do
     - key=SenhaDaRede: Defina a senha da rede Wi-Fi
 3. Inicie o hotspot com o seguinte comando: `netsh wlan start hostednetwork`
 
-#### __Configuração via Configurações do Windows__
+#### __Configuração via interface gráfica do Windows__
 
 1. Acesse as configurações do windowns ou pressione `windows + i`.
 2. Acesse as configurações de rede e internet.
@@ -107,8 +110,8 @@ Para transmitir uma aplicação em rede local via wi-fi hotspot do computador do
 #### __Dificuldade encontrada no Windows__
 Pode ser que em algumas versões do windows exista uma dificuldade de executar o hotspot wifi. Para isso deve-se fazer um check-up inicial e verificar se o driver aceita hospoder rede.
 
-1. Verificar se hospedagem de rede: `netsh wlan show drivers`
-2. Verifique se a resposta em __Hosted network supported"__ é YES
+1. Verificar drivers habilitados hospedagem de rede: `netsh wlan show drivers`
+2. Verifique se a resposta em __Hosted network supported__ é YES
 3. Se for NÃO, tente entrar no gerenciador de dispositivo e atualizar os adaptadores de rede
 4. Caso o adaptador de rede ainda não permita o Hotspot como servidor, tente instalar algum desses drives "Microsoft Hosted Network Virtual Adapter" ou "Microsoft Virtual WiFi Miniport Adapter."
 
@@ -152,7 +155,7 @@ A partir do diretório raiz do projeto rodar o script `runServer.sh` e escolher 
 
 Para baixar pastas específicas de um repositório GitHub, como pastas de exemplos, basta acessar o site https://kinolien.github.io/gitzip/ e colar o endereço completo da pasta para baixar o seu conteúdo com arquivo zip.
 
-## A-Frame
+## Executando aplicação AR Multiplayer Sistema Solar
 
 ### Sistema de referência comum para todos os óculos
 
@@ -230,8 +233,13 @@ httpsServer.listen(port, () => {
   console.log(`server running at https://127.0.0.1:${port} and https://10.42.0.1:${port}`);
 });
 ```
+5) Acesse a pasta do projeto sistemaSolar
 
-5) O servidor deverá ser inicializado com `node index.js`.
+6) Inicie o servidor com o comando: `node index.js`.
+
+7) Acesse pelo óculos o wifi-hotspot liberado pelo seu computador
+
+8) Acesse o navegador do óculos e digite `https://10.42.0.1:8080`
 
 ## Sobre ancoragem no A-Frame
 
@@ -253,4 +261,4 @@ httpsServer.listen(port, () => {
 
 ## Tarefas faltantes
 
-- Deixar a cor do beiral diferente entre os pares de pardes para deixar menos homogêneo. Usar cores mais cinzas e talvez mais escuras.
+- Deixar a cor do beiral diferente entre os pares de paredes para deixar menos homogêneo. Usar cores mais cinzas e talvez mais escuras.
