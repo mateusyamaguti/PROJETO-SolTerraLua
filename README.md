@@ -5,7 +5,18 @@
 ## Tópicos
 - [Objetivo](#Objetivo)
 - [Tecnologias, biblioteca e frameworks](#Tecnologias-biblioteca-e-frameworks)
-- [Multiplayer Sistema Solar](#Multiplayer-Sistema-Solar)
+- [A-Frame](#A-Frame)
+- [Pré-requisitos](#Pré-requisitos)
+- [Transmissão do servidor para os clientes](#Transmissão-do-servidor-para-os-clientes)
+- [Organização das pastas](#Organização-das-pastas)
+- [Como rodar um exemplo em servidor https usando a estrutura de pastas acima](#Como-rodar-um-exemplo-em-servidor-https-usando-a-estrutura-de-pastas-acima)
+- [Copiando pasta de um repositório Github](#Copiando-pasta-de-um-repositório-Github)
+- [xecutando aplicação AR Multiplayer Sistema Solar](#xecutando-aplicação-AR-Multiplayer-Sistema-Solar)
+- [Socket.io](#Socket.io)
+- [Sobre ancoragem no A-Frame](#Sobre-ancoragem-no-A-Frame)
+- [Sobre o modo sleep do óculos Meta Quest](#Sobre-o-modo-sleep-do-óculos-Meta-Quest)
+- [Check-list de configuração dos óculos](#Check-list-de-configuração-dos-óculos)
+- [Tarefas faltantes](#Tarefas-faltantes)
 
 ## Objetivo
 
